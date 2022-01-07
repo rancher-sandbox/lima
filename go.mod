@@ -7,7 +7,7 @@ require (
 	github.com/alessio/shellescape v1.4.1
 	github.com/cheggaaa/pb/v3 v3.0.8
 	github.com/containerd/containerd v1.5.5
-	github.com/containerd/continuity v0.1.0
+	github.com/containerd/continuity v0.2.2
 	github.com/digitalocean/go-qemu v0.0.0-20210326154740-ac9e0b687001
 	github.com/diskfs/go-diskfs v1.2.0
 	github.com/docker/go-units v0.4.0
@@ -28,6 +28,7 @@ require (
 )
 
 require (
+	github.com/Microsoft/go-winio v0.5.1 // indirect
 	github.com/VividCortex/ewma v1.1.1 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.0 // indirect
 	github.com/digitalocean/go-libvirt v0.0.0-20201209184759-e2a69bcd5bd1 // indirect
