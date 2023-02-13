@@ -22,7 +22,7 @@ require (
 	github.com/gorilla/mux v1.8.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/intel-go/cpuid v0.0.0-20220614022739-219e067757cb
-	github.com/lima-vm/sshocker v0.3.1
+	github.com/lima-vm/sshocker v0.3.2
 	github.com/mattn/go-isatty v0.0.17
 	github.com/mattn/go-shellwords v1.0.12
 	github.com/miekg/dns v1.1.50
