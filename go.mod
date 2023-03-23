@@ -23,7 +23,7 @@ require (
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/lima-vm/sshocker v0.3.2
 	github.com/lithammer/dedent v1.1.0
-	github.com/mattn/go-isatty v0.0.17
+	github.com/mattn/go-isatty v0.0.18
 	github.com/mattn/go-shellwords v1.0.12
 	github.com/miekg/dns v1.1.51
 	github.com/mikefarah/yq/v4 v4.31.1
@@ -35,7 +35,7 @@ require (
 	github.com/spf13/cobra v1.6.1
 	github.com/xorcare/pointer v1.2.2
 	golang.org/x/sync v0.1.0
-	golang.org/x/sys v0.5.0
+	golang.org/x/sys v0.6.0
 	gopkg.in/op/go-logging.v1 v1.0.0-20160211212156-b2cb9fa56473
 	gotest.tools/v3 v3.4.0
 	inet.af/tcpproxy v0.0.0-20220326234310-be3ee21c9fa0
