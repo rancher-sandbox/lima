@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - 'v*.rd*'
+    - 'test-v*.rd*'
+  workflow_dispatch:
+
+env:
+  GO111MODULE: on
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os:
+        - macos-11
+        - macos-12
+        - ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 10
+    steps:
+    - uses: actions/setup-go@v4
+      with:
+        go-version: 1.21.x
+    - uses: actions/checkout@v4
+      with:
+        persist-credentials: false
+    - name: Build lima tarballs
+      env:
+        OS: ${{ matrix.os }}
+      run: |
+        for GOARCH in amd64 arm64; do
+          if [ "$GOARCH" == "amd64" -o "$(uname)" == "Darwin" ]; then
+            make clean minimal
+            TARBALL="lima.$OS.$GOARCH.tar.gz"
+            tar cfvz "$TARBALL" -C _output --exclude ./share/lima/templates ./
+            sha512sum "$TARBALL" > "$TARBALL.sha512sum"
+          fi
+        done
+    - uses: actions/upload-artifact@v3
+      with:
+        name: lima.${{ matrix.os }}
+        path: lima.${{ matrix.os }}.*
+        if-no-files-found: error
+
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    needs: [build]
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/download-artifact@v3
+    - name: "Create release"
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        tag="${GITHUB_REF##*/}"
+        asset_flags=()
+        for f in lima.*.tar.gz*; do asset_flags+=("-a" "$f"); done
+        hub release create "${asset_flags[@]}" -m "${tag}" --draft "${tag}"
